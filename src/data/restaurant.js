@@ -61,8 +61,9 @@ export const restaurant = {
     tiktok: null,
   },
 
-  // Set this once the site has a real domain; used for canonical + Open Graph.
-  siteUrl: null,
+  // Used for the canonical link and Open Graph tags. Change this if the site
+  // moves to a custom domain — nothing else needs touching.
+  siteUrl: 'https://lululala.onrender.com',
 };
 
 export const directionsUrl =
