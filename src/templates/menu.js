@@ -93,10 +93,9 @@ export function menuPage() {
       <h1 class="menu-hero__title">The <span>whole</span> board</h1>
     </div>
     <p class="menu-hero__lede">
-      Transcribed from the chalkboard inside 139 Hester Street.
+      Rice bowls, kimbap, tteokbokki, and the day’s homemade banchan.
       <strong>${esc(restaurant.payment)}.</strong>
-      Prices change on a chalkboard faster than they do on a website —
-      call <a href="tel:${esc(restaurant.phone)}">${esc(restaurant.phoneDisplay)}</a> if something matters.
+      ${esc(restaurant.hours.note)}, ${esc(restaurant.hours.display)}.
     </p>
   </div>
 </section>
@@ -138,8 +137,11 @@ export function menuPage() {
       <p class="menu-note__text">
         <b>Banchan prices are not on the board.</b>
         Kimchi, cucumber, macaroni and fishcake are made in house and listed
-        without prices, so none are shown here. Ask at the counter, or call
-        <a href="tel:${esc(restaurant.phone)}">${esc(restaurant.phoneDisplay)}</a>.
+        without prices, so none are shown here — ask at the counter. Everything
+        else is priced as chalked on the board, but a chalkboard changes faster
+        than a website: call
+        <a href="tel:${esc(restaurant.phone)}">${esc(restaurant.phoneDisplay)}</a>
+        if something matters.
       </p>
       <a class="btn btn--ink" href="index.html#visit">How to get there</a>
     </aside>
