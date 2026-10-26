@@ -1,0 +1,448 @@
+/* ==========================================================================
+   Lululala — menu page
+   Text-forward and editorial. Names read first, prices are always visible,
+   nothing hides behind a tap.
+   ========================================================================== */
+
+/* ---- Page header --------------------------------------------------------- */
+
+.menu-hero {
+  padding-block: clamp(2.5rem, 2rem + 4vw, 5rem) clamp(2rem, 1.5rem + 3vw, 3.5rem);
+}
+
+.menu-hero__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: end;
+}
+
+@media (min-width: 860px) {
+  .menu-hero__grid {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  }
+}
+
+.menu-hero__title {
+  font-size: var(--step-5);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--chalk-white);
+}
+
+.menu-hero__title span {
+  color: var(--chalk-butter);
+}
+
+.menu-hero__eyebrow {
+  color: var(--chalk-mint);
+  margin-bottom: clamp(0.9rem, 2vw, 1.4rem);
+}
+
+.menu-hero__lede {
+  color: rgba(242, 236, 226, 0.75);
+  font-size: var(--step-0);
+  max-width: 44ch;
+}
+
+.menu-hero__lede strong {
+  color: var(--chalk-white);
+}
+
+/* ---- Sticky toolbar: search + category tabs ------------------------------ */
+
+.menu-bar {
+  position: sticky;
+  top: 60px; /* clears the site header */
+  z-index: 90;
+  background: var(--board);
+  border-top: 1px solid var(--board-line);
+  border-bottom: 1px solid var(--board-line);
+}
+
+@media (max-width: 560px) {
+  .menu-bar {
+    top: 56px;
+  }
+}
+
+.menu-bar__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding-block: 0.8rem;
+}
+
+@media (min-width: 900px) {
+  .menu-bar__inner {
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+}
+
+/* Search */
+
+.menu-search {
+  position: relative;
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  .menu-search {
+    width: 270px;
+  }
+}
+
+.menu-search__input {
+  width: 100%;
+  min-height: 46px;
+  padding: 0.55rem 2.6rem 0.55rem 2.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--board-line);
+  background: var(--board-soft);
+  color: var(--chalk-white);
+  font-size: 16px; /* stops iOS zooming the page on focus */
+}
+
+.menu-search__input::placeholder {
+  color: rgba(242, 236, 226, 0.62);
+}
+
+.menu-search__input:focus {
+  border-color: var(--neon);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 45, 138, 0.25);
+}
+
+.menu-search__icon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 17px;
+  height: 17px;
+  color: rgba(242, 236, 226, 0.5);
+  pointer-events: none;
+}
+
+.menu-search__clear {
+  position: absolute;
+  right: 0.3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: rgba(242, 236, 226, 0.6);
+  cursor: pointer;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.menu-search__clear:hover {
+  color: var(--chalk-pink);
+}
+
+.menu-search.has-value .menu-search__clear {
+  display: grid;
+}
+
+/* Category tabs — horizontally scrollable on narrow screens. */
+
+.cat-tabs {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  /* Let the first and last chip breathe against the gutter. */
+  margin-inline: calc(var(--gutter) * -1);
+  padding-inline: var(--gutter);
+  scroll-padding-inline: var(--gutter);
+}
+
+.cat-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .cat-tabs {
+    margin-inline: 0;
+    padding-inline: 0;
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+}
+
+.cat-tab {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 42px;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--board-line);
+  background: transparent;
+  color: rgba(242, 236, 226, 0.78);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--fast) var(--ease),
+    color var(--fast) var(--ease), border-color var(--fast) var(--ease);
+}
+
+.cat-tab:hover {
+  border-color: rgba(242, 236, 226, 0.5);
+  color: var(--chalk-white);
+}
+
+/* Active state is colour *and* a filled shape + count, never colour alone. */
+.cat-tab[aria-current='true'] {
+  background: var(--chalk-white);
+  border-color: var(--chalk-white);
+  color: var(--board);
+}
+
+.cat-tab__count {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  opacity: 0.75;
+}
+
+/* ---- Menu body ----------------------------------------------------------- */
+
+/* This page stacks a sticky header *and* a sticky toolbar, so an anchored
+   category heading needs to clear both, not just the header. */
+:root:has(.menu-bar) {
+  scroll-padding-top: 8.75rem;
+}
+
+.menu-body {
+  background: var(--cream);
+  padding-block: clamp(2.5rem, 2rem + 4vw, 5rem) clamp(3rem, 6vw, 6rem);
+}
+
+.menu-cat + .menu-cat {
+  margin-top: clamp(2.75rem, 6vw, 5rem);
+}
+
+.menu-cat__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.25rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 3px solid var(--ink);
+}
+
+.menu-cat__name {
+  font-size: var(--step-3);
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+
+.menu-cat__board {
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--neon-deep);
+  letter-spacing: 0.02em;
+}
+
+.menu-cat__blurb {
+  margin-top: 0.9rem;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  max-width: 48ch;
+}
+
+/* Item rows: name — dotted leader — price. */
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: clamp(1.1rem, 2.5vw, 1.6rem) 0 0;
+}
+
+.menu-item {
+  display: grid;
+  grid-template-columns: auto minmax(1rem, 1fr) auto;
+  align-items: baseline;
+  column-gap: 0.6rem;
+  padding-block: clamp(0.75rem, 1.6vw, 1rem);
+  border-bottom: 1px solid rgba(23, 19, 16, 0.12);
+}
+
+/* Dotted leader running from the name to the price. */
+.menu-item__leader {
+  border-bottom: 2px dotted rgba(23, 19, 16, 0.26);
+  transform: translateY(-0.32em);
+  min-width: 1rem;
+}
+
+.menu-item__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-1);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.menu-item__price {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--step-0);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* No confirmed price → say so plainly, never guess a number. */
+.menu-item__price--tbc {
+  font-weight: 500;
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+}
+
+/* Search needs JS; with it off the field would do nothing, so hide it. */
+.no-js .menu-search {
+  display: none;
+}
+
+.menu-item__note {
+  grid-column: 1 / -1;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  margin-top: 0.15rem;
+}
+
+.badge {
+  font-family: var(--font-display);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.25em 0.6em;
+  border-radius: 999px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.badge--new {
+  background: var(--neon-deep);
+  color: #fff;
+}
+
+.badge--signature {
+  background: var(--ink);
+  color: var(--chalk-butter);
+}
+
+/* Add-ons + footnotes */
+
+.menu-extras {
+  margin-top: 1.1rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--cream-deep);
+  border-radius: var(--r-sm);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.5rem;
+  font-size: var(--step--1);
+}
+
+.menu-extras__label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  width: 100%;
+}
+
+.menu-extras b {
+  font-variant-numeric: tabular-nums;
+}
+
+.menu-footnote {
+  margin-top: 1rem;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+}
+
+/* Search empty state */
+
+.menu-empty {
+  display: none;
+  padding: clamp(2.5rem, 6vw, 4.5rem) 0;
+  text-align: center;
+}
+
+.menu-empty__title {
+  font-size: var(--step-3);
+  letter-spacing: -0.02em;
+}
+
+.menu-empty__body {
+  margin: 0.85rem auto 1.5rem;
+  color: var(--ink-soft);
+  max-width: 34ch;
+}
+
+/* Toggled by menu-page.js when a search matches nothing. */
+.menu-body.is-empty .menu-empty {
+  display: block;
+}
+
+.menu-body.is-empty .menu-cat {
+  display: none;
+}
+
+/* Hidden by search */
+.menu-item[hidden],
+.menu-cat[hidden] {
+  display: none;
+}
+
+/* ---- Closing note -------------------------------------------------------- */
+
+.menu-note {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 2px dashed rgba(23, 19, 16, 0.22);
+  border-radius: var(--r-md);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-note__text {
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  max-width: 52ch;
+}
+
+.menu-note__text b {
+  color: var(--ink);
+}

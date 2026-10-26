@@ -1,0 +1,547 @@
+/* ==========================================================================
+   Lululala — home page
+   ========================================================================== */
+
+/* ---- Hero ---------------------------------------------------------------- */
+
+.hero {
+  padding-block: clamp(2.5rem, 1.5rem + 5vw, 6rem) clamp(3rem, 2rem + 5vw, 6.5rem);
+  overflow: hidden;
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.25rem, 5vw, 4rem);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .hero__grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(2.5rem, 5vw, 5rem);
+  }
+}
+
+.hero__eyebrow {
+  color: var(--chalk-mint);
+  margin-bottom: clamp(1rem, 2vw, 1.6rem);
+}
+
+.hero__title {
+  font-size: var(--step-5);
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  color: var(--chalk-white);
+  max-width: 14ch;
+}
+
+/* The chalk highlight under "happiness" — drawn, not a flat rule. */
+.hero__title em {
+  font-style: normal;
+  color: var(--chalk-butter);
+  position: relative;
+  white-space: nowrap;
+}
+
+.hero__title em::after {
+  content: '';
+  position: absolute;
+  left: -0.04em;
+  right: -0.04em;
+  bottom: -0.1em;
+  height: 0.16em;
+  background: var(--neon);
+  border-radius: 999px;
+  transform: rotate(-1.1deg) scaleX(0);
+  transform-origin: left center;
+  animation: chalk-underline 620ms var(--ease) 420ms forwards;
+}
+
+@keyframes chalk-underline {
+  to {
+    transform: rotate(-1.1deg) scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__title em::after {
+    animation: none;
+    transform: rotate(-1.1deg) scaleX(1);
+  }
+}
+
+.hero__lede {
+  margin-top: clamp(1.1rem, 2.5vw, 1.75rem);
+  color: rgba(242, 236, 226, 0.78);
+  max-width: 34ch;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+/* Chalk facts — small handwritten notes under the CTAs. */
+.chalk-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.4rem;
+  margin-top: clamp(1.75rem, 3.5vw, 2.75rem);
+  padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
+  border-top: 1px solid var(--board-line);
+  list-style: none;
+  padding-inline: 0;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.chalk-facts li {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.chalk-facts li::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
+.chalk-facts li:nth-child(1) {
+  color: var(--chalk-mint);
+}
+.chalk-facts li:nth-child(2) {
+  color: var(--chalk-peach);
+}
+.chalk-facts li:nth-child(3) {
+  color: var(--chalk-lilac);
+}
+
+/* Hero photo — framed like a picture taped to the board. */
+.hero__media {
+  position: relative;
+  justify-self: center;
+  width: 100%;
+  max-width: 520px;
+}
+
+.hero__photo {
+  width: 100%;
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(242, 236, 226, 0.14);
+  box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.9);
+  aspect-ratio: 658 / 994;
+  object-fit: cover;
+}
+
+@media (min-width: 900px) {
+  .hero__photo {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+/* The red chop from the storefront sign, as a corner seal. */
+.chop {
+  position: absolute;
+  right: clamp(-0.5rem, -1vw, -1rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  display: grid;
+  place-items: center;
+  width: clamp(54px, 9vw, 74px);
+  aspect-ratio: 1;
+  background: var(--chop);
+  color: #fff;
+  border-radius: var(--r-sm);
+  font-size: clamp(0.95rem, 2vw, 1.3rem);
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding: 0.35em;
+  transform: rotate(5deg);
+  box-shadow: var(--shadow);
+}
+
+/* ---- Showcase: straight off the board ------------------------------------ */
+
+.showcase {
+  background: var(--cream);
+}
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-bottom: clamp(2rem, 4vw, 3.25rem);
+}
+
+.section-head__title {
+  font-size: var(--step-4);
+  letter-spacing: -0.025em;
+  max-width: 16ch;
+}
+
+.section-head__eyebrow {
+  color: var(--neon-deep);
+  margin-bottom: 0.8rem;
+}
+
+.section-head__aside {
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  max-width: 30ch;
+}
+
+/* Editorial grid: the signature bowl spans two columns, the rest sit beside it. */
+.dish-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(0.9rem, 2vw, 1.5rem);
+}
+
+@media (min-width: 620px) {
+  .dish-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 980px) {
+  .dish-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dish--lead {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+}
+
+.dish {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 200px;
+  padding: clamp(1.25rem, 2.5vw, 1.9rem);
+  border-radius: var(--r-md);
+  background: var(--board);
+  color: var(--chalk-white);
+  text-decoration: none;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: transform var(--fast) var(--ease);
+}
+
+.dish:hover {
+  transform: translateY(-3px);
+}
+
+.dish--lead {
+  min-height: clamp(260px, 38vw, 420px);
+}
+
+/* Alternate cards sit on cream to break the all-dark rhythm. */
+.dish--light {
+  background: var(--cream-deep);
+  color: var(--ink);
+  border: 1px solid rgba(23, 19, 16, 0.1);
+}
+
+.dish--neon {
+  background: var(--neon-deep);
+  color: #fff;
+}
+
+.dish__name {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-2);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.dish--lead .dish__name {
+  font-size: var(--step-4);
+  max-width: 10ch;
+}
+
+.dish__meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.dish__cat {
+  display: block;
+  margin-bottom: 0.3em;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.dish__price {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--step-1);
+  white-space: nowrap;
+}
+
+.dish--lead .dish__price {
+  font-size: var(--step-2);
+}
+
+.dish__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.dish__tag {
+  align-self: flex-start;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.3em 0.75em;
+  border-radius: 999px;
+  background: var(--chalk-butter);
+  color: var(--ink);
+}
+
+/* Hand-drawn bowl, scaled up on the lead card. */
+.dish__art {
+  width: clamp(76px, 12vw, 116px);
+  opacity: 0.9;
+  margin-left: auto;
+}
+
+.dish--lead .dish__art {
+  width: clamp(130px, 22vw, 230px);
+}
+
+.showcase__foot {
+  margin-top: clamp(1.75rem, 3.5vw, 2.75rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+}
+
+.showcase__note {
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  max-width: 38ch;
+}
+
+/* ---- Personality strip --------------------------------------------------- */
+
+.statement {
+  background: var(--neon-deep);
+  color: #fff;
+}
+
+.statement__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+@media (min-width: 860px) {
+  .statement__grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+}
+
+.statement__title {
+  font-size: var(--step-4);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  max-width: 15ch;
+}
+
+.statement__body {
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+  max-width: 42ch;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.statement__facts {
+  list-style: none;
+  padding: 0;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  display: grid;
+  gap: 0.65rem;
+  max-width: 34ch;
+}
+
+.statement__facts li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: baseline;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+  font-size: var(--step--1);
+}
+
+.statement__facts dt,
+.statement__facts b {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+.statement__photo {
+  width: 100%;
+  border-radius: var(--r-md);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
+}
+
+.statement__caption {
+  margin-top: 0.75rem;
+  font-size: var(--step--1);
+  color: rgba(255, 255, 255, 0.92);
+  font-family: var(--font-display);
+}
+
+/* ---- Visit --------------------------------------------------------------- */
+
+.visit__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
+}
+
+@media (min-width: 860px) {
+  .visit__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.visit__title {
+  font-size: var(--step-4);
+  color: var(--chalk-white);
+  letter-spacing: -0.025em;
+}
+
+.visit__eyebrow {
+  color: var(--chalk-butter);
+  margin-bottom: 0.9rem;
+}
+
+.visit__details {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  display: grid;
+  gap: 0;
+}
+
+.visit__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.15rem;
+  padding-block: clamp(0.9rem, 2vw, 1.2rem);
+  border-top: 1px solid var(--board-line);
+}
+
+@media (min-width: 480px) {
+  .visit__row {
+    grid-template-columns: 7.5rem 1fr;
+    gap: 1.25rem;
+    align-items: baseline;
+  }
+}
+
+.visit__row dt {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--chalk-mint);
+}
+
+.visit__row dd {
+  margin: 0;
+  font-size: var(--step-1);
+  color: var(--chalk-white);
+}
+
+.visit__row dd a {
+  text-decoration: none;
+  border-bottom: 1px solid rgba(242, 236, 226, 0.3);
+  transition: color var(--fast) var(--ease),
+    border-color var(--fast) var(--ease);
+}
+
+.visit__row dd a:hover {
+  color: var(--chalk-pink);
+  border-color: var(--chalk-pink);
+}
+
+.visit__row small {
+  display: block;
+  font-size: var(--step--1);
+  color: rgba(242, 236, 226, 0.55);
+  margin-top: 0.15rem;
+}
+
+.visit__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.visit__media {
+  position: relative;
+}
+
+.visit__photo {
+  width: 100%;
+  border-radius: var(--r-md);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid rgba(242, 236, 226, 0.12);
+}
+
+.visit__cash {
+  position: absolute;
+  left: clamp(-0.5rem, -1vw, -1rem);
+  top: clamp(-0.75rem, -1.5vw, -1.25rem);
+  background: var(--chalk-butter);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5em 1em;
+  border-radius: 999px;
+  transform: rotate(-4deg);
+  box-shadow: var(--shadow);
+}
