@@ -147,14 +147,37 @@ is still complete and the category tabs are ordinary anchor links.
 
 ## Deploying
 
-`dist/` is a static folder — any host will do.
+**It is already live:** https://lululala.onrender.com
 
-**Netlify / Vercel / Cloudflare Pages:** build command `node build.js`, publish
-directory `dist`.
+| | |
+|---|---|
+| Repository | https://github.com/akilfoster2002-halo/lululala-site |
+| Host | Render — static site `lululala` |
+| Build command | `node build.js` |
+| Publish directory | `dist` |
+| Auto-deploy | on, from `main` |
 
-**GitHub Pages or any web host:** run `node build.js` and upload the contents of
-`dist/`.
+Push to `main` and Render rebuilds and republishes in about half a minute. There
+is nothing to run by hand.
 
-Before going live, set `siteUrl` in `src/data/restaurant.js` to the real domain.
-That turns on the canonical URL and the Open Graph tags, which are deliberately
-omitted until a domain exists.
+```bash
+git add -A && git commit -m "Update the menu" && git push
+```
+
+Render also serves `/menu` as well as `/menu.html`, so both URLs work.
+
+### Moving to a custom domain
+
+1. Add the domain in the Render dashboard (Settings → Custom Domains) and point
+   your DNS at the record it gives you.
+2. Change `siteUrl` in [`src/data/restaurant.js`](src/data/restaurant.js) to the
+   new address, then commit and push.
+
+That second step is what keeps the canonical link and the Open Graph tags
+correct. It is the only place the domain is written down.
+
+### Hosting it somewhere else
+
+`dist/` is a plain static folder, so any host works. On Netlify, Vercel or
+Cloudflare Pages use build command `node build.js` and publish directory
+`dist`. Anywhere else, run `node build.js` and upload what is in `dist/`.
